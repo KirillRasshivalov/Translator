@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Translator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #007bff;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .translator-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 750px;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        .form-label {
+            font-weight: 600;
+        }
+        .text-muted {
+            font-size: 0.9rem;
+        }
+        .output-container {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="translator-card">
+    <h1 class="text-center header-title mb-4">Translator</h1>
+    <form th:action="@{/translate}" method="post">
+        <div class="form-group">
+            <label for="sourceLang" class="form-label">From:</label>
+            <select class="form-control" id="sourceLang" name="sourceLang">
+                <option value="not found" th:selected="${sourceLang == 'not found'}">Choose language</option>
+                <option value="en" th:selected="${sourceLang == 'en'}">English</option>
+                <option value="ru" th:selected="${sourceLang == 'ru'}">Russian</option>
+                <option value="fr" th:selected="${sourceLang == 'fr'}">French</option>
+                <option value="es" th:selected="${sourceLang == 'es'}">Spanish</option>
+                <option value="de" th:selected="${sourceLang == 'de'}">German</option>
+                <option value="it" th:selected="${sourceLang == 'it'}">Italian</option>
+                <option value="zh" th:selected="${sourceLang == 'zh'}">Chinese</option>
+                <option value="ja" th:selected="${sourceLang == 'ja'}">Japanese</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="targetLang" class="form-label">To:</label>
+            <select class="form-control" id="targetLang" name="targetLang">
+                <option value="not found" th:selected="${targetLang == 'not found'}">Choose language</option>
+                <option value="en" th:selected="${targetLang == 'en'}">English</option>
+                <option value="ru" th:selected="${targetLang == 'ru'}">Russian</option>
+                <option value="fr" th:selected="${targetLang == 'fr'}">French</option>
+                <option value="es" th:selected="${targetLang == 'es'}">Spanish</option>
+                <option value="de" th:selected="${targetLang == 'de'}">German</option>
+                <option value="it" th:selected="${targetLang == 'it'}">Italian</option>
+                <option value="zh" th:selected="${targetLang == 'zh'}">Chinese</option>
+                <option value="ja" th:selected="${targetLang == 'ja'}">Japanese</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputText" class="form-label">Text to translate:</label>
+            <textarea class="form-control" id="inputText" name="inputText" rows="3" th:text="${inputText}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="outputText" class="form-label">Translated text:</label>
+            <div class="output-container">
+                <textarea class="form-control" id="outputText" name="outputText" rows="3" th:text="${outputText}" readonly></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exceptionText" class="form-label">Error log:</label>
+            <textarea class="form-control" id="exceptionText" name="exceptionText" rows="1" th:text="${exceptionText}" readonly></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Translate</button>
+    </form>
+</div>
+</body>
+</html>
